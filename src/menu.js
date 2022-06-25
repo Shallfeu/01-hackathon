@@ -1,7 +1,7 @@
 import { Menu } from './core/menu'
 
 export class ContextMenu extends Menu {
-  #modules // {type: new Module(type, text),...}
+  #modules
 
   constructor(selector, modules = []) {
     super(selector);
@@ -43,6 +43,7 @@ export class ContextMenu extends Menu {
 
     // Go to module trigger
     this.el.addEventListener('click', (event) =>
-      event.target.tagName === 'LI' && this.modules[event.target.dataset.type].trigger());
+      event.target.tagName === 'LI'
+      && this.modules.find((mod) => mod.type === event.target.dataset.type)?.trigger());
   }
 }
