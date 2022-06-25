@@ -1,16 +1,21 @@
 import { Menu } from './core/menu'
 
 export class ContextMenu extends Menu {
-  #modules
+  #modules;
+  #menuWidthPx;
+  #menuHeightPx;
 
   constructor(selector, modules = []) {
     super(selector);
     this.modules = modules;
   }
 
-  open(top, left) {
-    // const [width, height] = this.getComputedSize(this.el);
-    // console.log(this.el.clientHeight);
+  open(topClick, leftClick) {
+    // Set menu size
+    this.#computedMuneSizes();
+
+    // Get current menu position by click position
+    const [top, left] = this.#computedMenuPosition(topClick, leftClick);
 
     return this.el?.style
       && Object.keys(this.modules).length
@@ -21,22 +26,29 @@ export class ContextMenu extends Menu {
     return this.el?.style && (this.el.style.display = 'none');
   }
 
-  add() { 
+  add() {
     return Object.keys(this.modules).length
       && (this.el.innerHTML = Object.values(this.modules).reduce((acc, mod) => acc += mod.toHTML(), ''));
   }
 
-  getComputedHiddenElSize(el) {
-    // el.style.visibility = 'hidden';
-    // el.style.display = 'block';
-
-    // console.log(el.clientWidth, el.clientHeight);
-
-    return [
-      +window.getComputedStyle(el).getPropertyValue("width").match(/\d+/g),
-      +window.getComputedStyle(el).getPropertyValue("height").match(/\d+/g)
-    ]
+  #computedMuneSizes() {
+    if(this.#menuWidthPx > 0 && this.#menuHeightPx > 0) {
+      return false;
+    }
+    const menuClone = this.el.cloneNode(true);
+    menuClone.style.cssText = "display: inline-block;";
+    document.body.append(menuClone);
+    [this.#menuWidthPx, this.#menuHeightPx] = [menuClone.clientWidth, menuClone.clientHeight];
+    menuClone.remove();
   }  
+
+  #computedMenuPosition(topClick, leftClick) {
+    console.log(window.innerHeight,topClick);
+    return [
+      window.innerHeight - topClick > this.#menuHeightPx ? topClick : topClick - this.#menuHeightPx,
+      window.innerWidth - leftClick > this.#menuWidthPx ? leftClick : leftClick - this.#menuWidthPx
+    ];
+  }
 
   init() {
     // Add modules to menu
