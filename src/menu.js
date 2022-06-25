@@ -26,7 +26,12 @@ export class ContextMenu extends Menu {
       && (this.el.innerHTML = Object.values(this.modules).reduce((acc, mod) => acc += mod.toHTML(), ''));
   }
 
-  getComputedSize(el) {
+  getComputedHiddenElSize(el) {
+    // el.style.visibility = 'hidden';
+    // el.style.display = 'block';
+
+    // console.log(el.clientWidth, el.clientHeight);
+
     return [
       +window.getComputedStyle(el).getPropertyValue("width").match(/\d+/g),
       +window.getComputedStyle(el).getPropertyValue("height").match(/\d+/g)
