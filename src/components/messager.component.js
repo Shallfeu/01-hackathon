@@ -5,6 +5,9 @@ export class MessagerComponent {
 
   // Set message area
   constructor() {
+    if (this.#el = document.body.querySelector(`.${this.constructor.name}`)) {
+      return true;
+    }
     this.#el = document.createElement('div');
     this.#el.classList.add(this.constructor.name);
     document.body.append(this.#el);

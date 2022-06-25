@@ -1,13 +1,16 @@
-import { Menu } from './core/menu'
+import { Menu } from './core/menu';
+import { LoggerComponent } from './components/logger.component';
 
 export class ContextMenu extends Menu {
   #modules;
   #menuWidthPx;
   #menuHeightPx;
+  #log;
 
   constructor(selector, modules = []) {
     super(selector);
     this.modules = modules;
+    this.#log = new LoggerComponent();
   }
 
   open(topClick, leftClick) {
@@ -17,18 +20,25 @@ export class ContextMenu extends Menu {
     // Get current menu position by click position
     const [top, left] = this.#computedMenuPosition(topClick, leftClick);
 
+    // Logging
+    this.#log.setLog = `Menu open [${top}, ${left}]`;
+
     return this.el?.style
       && Object.keys(this.modules).length
       && (this.el.style = `top:${top || 0}px; left:${left || 0}px; display:block;`);
   }
 
   close() {
+    this.#log.setLog = `Menu close`;
     return this.el?.style && (this.el.style.display = 'none');
   }
 
-  add() {
+  add() {    
     return Object.keys(this.modules).length
-      && (this.el.innerHTML = Object.values(this.modules).reduce((acc, mod) => acc += mod.toHTML(), ''));
+      && (this.el.innerHTML = Object.values(this.modules).reduce((acc, mod) => {
+        this.#log.setLog = `Add module '${mod.text}' to menu`;
+        return acc += mod.toHTML();        
+    }, ''));
   }
 
   #computedMuneSizes() {
@@ -40,10 +50,11 @@ export class ContextMenu extends Menu {
     document.body.append(menuClone);
     [this.#menuWidthPx, this.#menuHeightPx] = [menuClone.clientWidth, menuClone.clientHeight];
     menuClone.remove();
+
+    this.#log.setLog = `Computed menu sizes [${this.#menuWidthPx} x ${this.#menuHeightPx}]px`;
   }  
 
   #computedMenuPosition(topClick, leftClick) {
-    console.log(window.innerHeight,topClick);
     return [
       window.innerHeight - topClick > this.#menuHeightPx ? topClick : topClick - this.#menuHeightPx,
       window.innerWidth - leftClick > this.#menuWidthPx ? leftClick : leftClick - this.#menuWidthPx
@@ -61,6 +72,9 @@ export class ContextMenu extends Menu {
     // Go to module trigger
     this.el.addEventListener('click', (event) =>
       event.target.tagName === 'LI'
-      && this.modules.find((mod) => mod.type === event.target.dataset.type)?.trigger());
+      && this.modules.find((mod) => 
+        (mod.type === event.target.dataset.type) && (this.#log.setLog = `Switch '${mod.text}' on!`))
+        ?.trigger()
+      );
   }
 }
