@@ -23,6 +23,6 @@ export class MessageModule extends Module {
 
   async trigger() {
     const randomMsg = this.msgs?.length ? this.msgs[~~(this.msgs.length * Math.random())] : { author: 'Заголовок', quote: 'Текст' };
-    this.msgComponent.add({ text: randomMsg.author, title: randomMsg.quote }, 3000);
+    this.msgComponent.add({ text: randomMsg.author, title: randomMsg.quote });
   }
 }
