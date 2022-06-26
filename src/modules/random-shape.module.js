@@ -1,13 +1,13 @@
 import { Module } from '../core/module';
 import { random } from '../utils';
-import '../css/random-shape.module.css';
+import styles from '../css/random-shape.module.css';
 
 export class RandomShapeModule extends Module {
    #typesOfShape
   
    constructor() {
       super('ShapeModule', 'Случайная фигура');
-      this.#typesOfShape = ['rect', 'circle', 'ellipse', 'polygon', 'line'];
+      this.#typesOfShape = ['rect', 'circle', 'ellipse', 'polygon'];
    }
 
    #randomType() {
@@ -62,7 +62,7 @@ export class RandomShapeModule extends Module {
    #createEllips() {
       const gradientID = random(0, 200);
       const width = random(50, 250);
-      const height = random(100, 250);
+      const height = random(50, 250);
       return `
          <svg width="${width}" height="${height}">
             <defs>
@@ -81,29 +81,6 @@ export class RandomShapeModule extends Module {
          </svg>`;
        
    };
-   #createLine() {
-      const gradientID = random(85, 100);
-      const width = random(50, 250);
-      const height = random(50, 250);
-
-      return `
-         <svg width="${width}" height="${height}">
-            <defs>
-            <linearGradient id="${gradientID}" gradientTransform="rotate(${random(0, 100)})">
-               <stop offset="${random(0, 15)}%"  stop-color="${this.#randomColor()}"></stop>
-               <stop offset="${random(85, 100)}%" stop-color="${this.#randomColor()}"></stop>
-            </linearGradient>
-            </defs>
-            <line 
-            x1="${random(0, 70)}" 
-            y1="${random(20, 30)}" 
-            x2="${random(0, 120)}" 
-            y2="${random(60, 180)}" 
-            stroke="url('#${gradientID}')"
-            />
-         </svg>
-      `;
-   };
    #createPolygon() {
       const gradientID = random(85, 100);
       return `
@@ -116,8 +93,8 @@ export class RandomShapeModule extends Module {
             </defs>
             <polygon points="
             ${random(5,10)},${random(100,150)}
-            ${random(50,150)},${random(5,15)}
-            ${random(200,250)},${random(100,150)}"
+            ${random(50,150)},${random(5,80)}
+            ${random(100,250)},${random(50,150)}"
             fill="url('#${gradientID}')"
             />
          </svg>
@@ -129,7 +106,7 @@ export class RandomShapeModule extends Module {
 
    #createRandomShape() {
       const wrapper = document.createElement('div');
-      wrapper.className = 'random-shape';
+      wrapper.className = 'random-shape rotate';
       wrapper.style.cssText = `
          position: absolute; 
          bottom: ${random(10, window.innerHeight - 250)}px;
@@ -145,9 +122,6 @@ export class RandomShapeModule extends Module {
             return wrapper;
          case 'ellipse':
             wrapper.innerHTML = this.#createEllips();
-            return wrapper;
-         case 'line':
-            wrapper.innerHTML = this.#createLine();
             return wrapper;
          case 'polygon': 
             wrapper.innerHTML = this.#createPolygon();

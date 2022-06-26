@@ -61,6 +61,14 @@ export class ContextMenu extends Menu {
     ];
   }
 
+  #addSwitchBut() {
+    this.el.insertAdjacentHTML('beforeend', `<li class="switch-style">Ночной режим</li>`)
+    this.el.querySelector('.switch-style').addEventListener('click', (event) =>
+      this.el.classList.contains('dark')
+        ? (event.target.innerHTML = 'Ночной режим') && this.el.classList.remove('dark')
+        : (event.target.innerHTML = 'Дневной режим') && this.el.classList.add('dark'));
+  }
+
   init() {
     // Add modules to menu
     this.add();
@@ -76,5 +84,8 @@ export class ContextMenu extends Menu {
         (mod.type === event.target.dataset.type) && (this.#log.setLog = `Switch '${mod.text}' on!`))
         ?.trigger()
       );
+
+    // Add style swith
+    this.#addSwitchBut(); 
   }
 }
