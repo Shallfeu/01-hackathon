@@ -49,7 +49,7 @@ export class TimerModule extends Module {
       {
         text: 'Timer',
         title:
-          '<div class="timer"><input class="timer-time" type="number" value="0"><button class="timer-btn">Start</button></div>',
+          '<div class="timer"><input class="timer-time" type="number" value="0" min="0" max="100"><button class="timer-btn">Start</button></div>',
       },
       100,
       'error',
@@ -57,8 +57,6 @@ export class TimerModule extends Module {
 
     timer.querySelector('.timer-btn').addEventListener('click', (event) => {
       const timeStr = this.createTimer(event.target);
-      const time = timeStr.querySelector('.time');
-      timeStr.querySelector('.time').textContent = time.textContent.replace('-', '');
       this.decreseTime(timeStr);
     });
   }
