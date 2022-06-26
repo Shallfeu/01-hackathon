@@ -1,51 +1,50 @@
 .MessagerComponent {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 1vh 1vw;
-    display: grid;
-    grid-gap: 10px;    
-    max-height: 100vh;
-    overflow: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1vh 1vw;
+  display: grid;
+  grid-gap: 10px;
+  max-height: 100vh;
+  overflow: auto;
 }
 
 .MessagerComponent__item {
-    padding: 1em;
-    border-left: 0.3em solid
+  padding: 1em;
+  border-left: 0.3em solid;
 }
 
 .MessagerComponent__item.info {
-    background-color: #f1f5f9;
-    border-left-color:#cbd5e1;
-    color: #475569;
+  background-color: #f1f5f9;
+  border-left-color: #cbd5e1;
+  color: #475569;
 }
 
 .MessagerComponent__item.error {
-    background-color: #fee2e2;
-    border-left-color:#fca5a5;
-    color: #b91c1c;
+  background-color: #fee2e2;
+  border-left-color: #fca5a5;
+  color: #b91c1c;
 }
 
 .MessagerComponent__item.warning {
-    background-color: #ffedd5;
-    border-left-color:#fdba74;
-    color: #b45309;
+  background-color: #ffedd5;
+  border-left-color: #fdba74;
+  color: #b45309;
 }
 
 .MessagerComponent__item.success {
-    background-color: #ecfccb;
-    border-left-color:#a3e635;
-    color: #365314;
+  background-color: #ecfccb;
+  border-left-color: #a3e635;
+  color: #365314;
 }
 
 .MessagerComponent__item > .title {
-    font-size: 1.4em;
-    font-weight: 400;
+  font-size: 1.4em;
+  font-weight: 400;
 }
 
 .MessagerComponent__item > p {
-    display: block;
-    padding-top: 0.5em;
+  display: block;
+  padding-top: 0.5em;
 }
-
