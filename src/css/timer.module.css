@@ -1,0 +1,3 @@
+li[data-type=TimerModule]::before {
+    background-image: url('../assets/timer.module.png') !important;
+}

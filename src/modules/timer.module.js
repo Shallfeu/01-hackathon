@@ -1,10 +1,10 @@
 import { Module } from '../core/module';
 import { MessagerComponent } from '../components/messager.component';
-import '../css/message.module.css';
+import '../css/timer.module.css';
 
 export class TimerModule extends Module {
   constructor() {
-    super('TimerModul', 'Задать таймер');
+    super('TimerModule', 'Задать таймер');
     this.msgComponent = new MessagerComponent();
   }
 

@@ -1,6 +1,6 @@
 import { Module } from '../core/module';
 import { MessagerComponent } from '../components/messager.component';
-import '../css/message.module.css';
+import '../css/clickAnalitick.module.css';
 
 export class ClickAnaliticModule extends Module {
   constructor() {
