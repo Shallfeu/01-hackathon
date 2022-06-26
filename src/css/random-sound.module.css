@@ -1,0 +1,3 @@
+li[data-type=RandomSoundModule]::before {
+    background-image: url('../assets/random-sound.png') !important;
+}

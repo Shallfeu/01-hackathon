@@ -23,7 +23,7 @@ export class RandomSoundModule extends Module {
    async getRandomPhrase(greeting = 'Привет от группы 33(34)-2') {
       const allPhrase = await this.getAllPhrases();
       if (allPhrase) {
-         const randomPhrase = allPhrase[random(0, allPhrase.length - 1)].body.split(' ');
+         const randomPhrase = allPhrase[random(0, allPhrase.length - 1)]?.body.split(' ');
          return randomPhrase[random(0, randomPhrase.length - 1)] || phrase;
       }
       return greeting;
