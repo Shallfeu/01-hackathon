@@ -55,8 +55,10 @@ export class TimerModule extends Module {
       'error',
     );
 
-    timer.querySelector('.timer-btn').addEventListener('click', (event) => {
+    timer.querySelector('.timer-btn').addEventListener('click', (event) => {      
       const timeStr = this.createTimer(event.target);
+      timer.querySelector('input').remove();
+      timer.querySelector('button').remove();
       this.decreseTime(timeStr);
     });
   }

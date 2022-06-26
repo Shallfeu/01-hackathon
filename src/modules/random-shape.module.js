@@ -7,7 +7,7 @@ export class RandomShapeModule extends Module {
    #animate
   
    constructor() {
-      super('ShapeModule', 'Случайная фигура');
+      super('RandomShapeModule', 'Случайная фигура');
       this.#typesOfShape = ['rect', 'circle', 'ellipse', 'polygon'];
       this.#animate = ['scale', 'spin', 'skew'];
    }
