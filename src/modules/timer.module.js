@@ -1,37 +1,67 @@
 import { Module } from '../core/module';
-import { TimerComponent } from '../components/timer.component';
+import { MessagerComponent } from '../components/messager.component';
 import '../css/message.module.css';
-import { random } from '../utils';
 
 export class TimerModule extends Module {
   #timers;
 
   constructor() {
     super('TimerModul', 'Задать таймер');
-    this.tmrComponent = new TimerComponent();
+    this.msgComponent = new MessagerComponent();
     this.#timers = [];
   }
 
-  createTimePromise(time) {
-    const timer = this.tmrComponent.add(time);
+  // Decrease timer
+  decreseTime(timerComponent) {
+    const timerStr = timerComponent.querySelector('.timer-time');
+    const interval = setInterval(() => {
+      const oldTime = Number(timerStr.textContent);
+      const newTime = oldTime - 1;
 
-    const promiseTimer = () =>
-      new Promise((resolve) => {
+      if (newTime < 1) {
+        timerStr.textContent = 'Время вышло!';
+        clearInterval(interval);
         setTimeout(() => {
-          this.tmrComponent.decreseTime(timer);
-          resolve();
+          timerComponent.remove();
         }, 1000);
-      });
-
-    return promiseTimer;
+      } else {
+        timerStr.textContent = newTime;
+      }
+    }, 1000);
   }
 
-  seqRunner(deeds) {
-    return deeds.reduce((p, deed) => p.then(() => deed()), Promise.resolve());
+  // Create h2 element where we will keep time
+  #createTimerCounter(time) {
+    const timerCounter = document.createElement('h2');
+    timerCounter.classList.add('timer-time');
+    timerCounter.textContent = time;
+    return timerCounter;
+  }
+
+  // Remove timer form and append timer str
+  createTimer(target) {
+    const mainH = target.closest('h2');
+    const timerDiv = mainH.querySelector('.timer');
+    const timerValue = timerDiv.querySelector('.timer-time').value;
+    timerDiv.remove();
+    const timeStr = this.#createTimerCounter(timerValue);
+    mainH.append(timeStr);
+    return mainH.closest('.MessagerComponent__item');
   }
 
   trigger() {
-    this.#timers.push(this.createTimePromise(random(2, 3)));
-    this.seqRunner(this.#timers);
+    const timer = this.msgComponent.add(
+      {
+        text: 'Timer',
+        title:
+          '<div class="timer"><input class="timer-time" type="number" value="0"><button class="timer-btn">Start</button></div>',
+      },
+      100,
+    );
+    this.#timers.push(timer);
+    timer.querySelector('.timer-btn').addEventListener('click', (event) => {
+      const timeStr = this.createTimer(event.target);
+      this.decreseTime(timeStr);
+    });
   }
 }
