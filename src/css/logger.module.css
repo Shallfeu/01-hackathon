@@ -1,0 +1,3 @@
+li[data-type=LoggerModule]::before {
+    background-image: url('../assets/logger.module.png') !important;
+}

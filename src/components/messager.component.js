@@ -5,6 +5,9 @@ export class MessagerComponent {
 
   // Set message area
   constructor() {
+    if (this.#el = document.body.querySelector(`.${this.constructor.name}`)) {
+      return true;
+    }
     this.#el = document.createElement('div');
     this.#el.classList.add(this.constructor.name);
     document.body.append(this.#el);
@@ -27,6 +30,7 @@ export class MessagerComponent {
   // --- Add message
   add({text, title}, delay = 3, type = 'info') {
     const msg = this.#render(text, title, type);
-    setTimeout(() => this.#delete(msg), delay * 1000);
+    delay !== 0 && setTimeout(() => this.#delete(msg), delay * 1000);
+    return msg;
   }
 }

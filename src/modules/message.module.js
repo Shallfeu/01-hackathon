@@ -1,10 +1,11 @@
+import '../css/message.module.css';
 import { Module } from '../core/module';
 import { MessagerComponent } from '../components/messager.component';
-import '../css/message.module.css';
 
 export class MessageModule extends Module {
-  constructor() {
-    super('MessageModul', 'Случайное сообщение');
+  constructor() {  
+    super('MessageModule', 'Случайное сообщение');
+
     this.msgComponent = new MessagerComponent();
 
     // (IIEF): try to set Messages list by server
