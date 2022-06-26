@@ -5,7 +5,7 @@ export class MessagerComponent {
 
   // Set message area
   constructor() {
-    if (this.#el = document.body.querySelector(`.${this.constructor.name}`)) {
+    if ((this.#el = document.body.querySelector(`.${this.constructor.name}`))) {
       return true;
     }
     this.#el = document.createElement('div');
@@ -25,7 +25,7 @@ export class MessagerComponent {
   // Delete message from DOM
   delete(msg) {
     msg.classList.add('for-delete');
-    setTimeout(() => msg.remove(), 1000);    
+    setTimeout(() => msg.remove(), 1000);
   }
 
   // --- Add message
