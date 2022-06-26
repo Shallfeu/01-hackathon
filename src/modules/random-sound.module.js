@@ -20,14 +20,17 @@ export class RandomSoundModule extends Module {
        }
    }
 
-   async getRandomPhrase() {
+   async getRandomPhrase(greeting = 'Привет от группы 33(34)-2') {
       const allPhrase = await this.getAllPhrases();
-      const randomPhrase = allPhrase[random(0, allPhrase.length - 1)].body.split(' ');
-      return randomPhrase[random(0, randomPhrase.length - 1)];
+      if (allPhrase) {
+         const randomPhrase = allPhrase[random(0, allPhrase.length - 1)].body.split(' ');
+         return randomPhrase[random(0, randomPhrase.length - 1)] || phrase;
+      }
+      return greeting;
    }
 
    async trigger() {
       window.speechSynthesis.cancel();
-      window.speechSynthesis.speak(new SpeechSynthesisUtterance(await this.getRandomPhrase()));
+      window.speechSynthesis.speak(new SpeechSynthesisUtterance(await this.getRandomPhrase())) 
    }
 }
