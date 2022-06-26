@@ -67,7 +67,7 @@ export class RandomShapeModule extends Module {
    #createEllips() {
       const gradientID = random(0, 200);
       const width = random(50, 250);
-      const height = random(100, 250);
+      const height = random(50, 250);
       return `
          <svg width="${width}" height="${height}">
             <defs>
@@ -98,8 +98,8 @@ export class RandomShapeModule extends Module {
             </defs>
             <polygon points="
             ${random(5,10)},${random(100,150)}
-            ${random(50,150)},${random(5,15)}
-            ${random(200,250)},${random(100,150)}"
+            ${random(50,150)},${random(5,80)}
+            ${random(100,250)},${random(50,150)}"
             fill="url('#${gradientID}')"
             />
          </svg>
