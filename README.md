@@ -1,7 +1,11 @@
 ## Hackaton #1
 
 ## Modules
-- MessageModule: Random message or famous quote output during some time 
+- MessageModule: Random message or famous quote output during some time
+- ClickAnaliticModule: Clicks calculation by time
+- LoggerModule:
+- RandomShapeModule:
+- TimerModule:
 
 # Developer Documentation
 ## Add module:
