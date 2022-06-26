@@ -4,10 +4,12 @@ import '../css/random-shape.module.css';
 
 export class RandomShapeModule extends Module {
    #typesOfShape
+   #animate
   
    constructor() {
       super('ShapeModule', 'Случайная фигура');
-      this.#typesOfShape = ['rect', 'circle', 'ellipse', 'polygon', 'line'];
+      this.#typesOfShape = ['rect', 'circle', 'ellipse', 'polygon'];
+      this.#animate = ['scale', 'spin', 'skew'];
    }
 
    #randomType() {
@@ -16,6 +18,9 @@ export class RandomShapeModule extends Module {
    #randomColor() {
       return `#${(Math.random().toString(16) + '000000').substring(2,8).toUpperCase()}`;
    };
+   #randomAnimate() {
+      return this.#animate[random(0, this.#animate.length -1)];
+   }
    #createRect() {
       const gradientID = random(0, 200);
       const width = random(50, 250);
@@ -81,29 +86,6 @@ export class RandomShapeModule extends Module {
          </svg>`;
        
    };
-   #createLine() {
-      const gradientID = random(85, 100);
-      const width = random(50, 250);
-      const height = random(50, 250);
-
-      return `
-         <svg width="${width}" height="${height}">
-            <defs>
-            <linearGradient id="${gradientID}" gradientTransform="rotate(${random(0, 100)})">
-               <stop offset="${random(0, 15)}%"  stop-color="${this.#randomColor()}"></stop>
-               <stop offset="${random(85, 100)}%" stop-color="${this.#randomColor()}"></stop>
-            </linearGradient>
-            </defs>
-            <line 
-            x1="${random(0, 70)}" 
-            y1="${random(20, 30)}" 
-            x2="${random(0, 120)}" 
-            y2="${random(60, 180)}" 
-            stroke="url('#${gradientID}')"
-            />
-         </svg>
-      `;
-   };
    #createPolygon() {
       const gradientID = random(85, 100);
       return `
@@ -129,11 +111,11 @@ export class RandomShapeModule extends Module {
 
    #createRandomShape() {
       const wrapper = document.createElement('div');
-      wrapper.className = 'random-shape';
+      wrapper.className = `random-shape ${this.#randomAnimate()}`;
       wrapper.style.cssText = `
          position: absolute; 
-         bottom: ${random(10, window.innerHeight - 250)}px;
-         right: ${random(10, window.innerWidth - 250)}px;
+         bottom: ${random(10, window.innerHeight - 350)}px;
+         right: ${random(10, window.innerWidth - 300)}px;
       `
       
       switch (this.#typesOfShape[this.#randomType()]) {
@@ -145,9 +127,6 @@ export class RandomShapeModule extends Module {
             return wrapper;
          case 'ellipse':
             wrapper.innerHTML = this.#createEllips();
-            return wrapper;
-         case 'line':
-            wrapper.innerHTML = this.#createLine();
             return wrapper;
          case 'polygon': 
             wrapper.innerHTML = this.#createPolygon();
