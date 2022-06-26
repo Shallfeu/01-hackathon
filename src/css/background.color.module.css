@@ -1,0 +1,3 @@
+li[data-type=BgColorModule]::before {
+    background-image: url('../assets/background.color.module.png') !important;
+}
