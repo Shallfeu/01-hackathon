@@ -20,7 +20,7 @@ export class ClickAnaliticModule extends Module {
         timeStr.textContent = `Время истекло, количество ваших кликов равно: ${clicks}`;
         clearInterval(interval);
         setTimeout(() => {
-          analiticBlock.remove();
+          this.msgComponent.delete(analiticBlock);
         }, delay * 1000);
       } else {
         timeStr.textContent = newTime;

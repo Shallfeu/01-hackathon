@@ -1,5 +1,6 @@
 .MessagerComponent {
   position: fixed;
+  z-index: 100;
   top: 0;
   left: 0;
   right: 0;
@@ -21,11 +22,22 @@
   color: #475569;
 }
 
+/* -- Error -- */
 .MessagerComponent__item.error {
   background-color: #fee2e2;
   border-left-color: #fca5a5;
   color: #b91c1c;
 }
+.MessagerComponent__item.error input[type='number'] {
+  border: 1px solid #fca5a5;
+  color: #b91c1c;
+}
+.MessagerComponent__item.error button {
+  border: 1px solid #fca5a5;
+  background:  linear-gradient(to bottom, #b91c1c, #da5454);
+  color: white;
+}
+
 
 .MessagerComponent__item.warning {
   background-color: #ffedd5;
@@ -48,3 +60,28 @@
   display: block;
   padding-top: 0.5em;
 }
+
+.MessagerComponent__item.for-delete {
+  transition: opacity 1s;
+  opacity: 0;
+}
+
+.MessagerComponent__item input[type='number'] {
+  padding: 0.2em 0.4em 0.2em 0.8em;
+  font-size: 1em;
+  text-align: center;
+  width: 5em;
+}
+
+.MessagerComponent__item button {
+  padding: 0.2em 0.4em;
+  font-size: 1em;
+  margin: 0em 0.5em;
+  border-radius: 0.2em;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+}
+
+
+
+

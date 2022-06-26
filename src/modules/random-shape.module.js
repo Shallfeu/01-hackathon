@@ -1,6 +1,6 @@
 import { Module } from '../core/module';
 import { random } from '../utils';
-import styles from '../css/random-shape.module.css';
+import '../css/random-shape.module.css';
 
 export class RandomShapeModule extends Module {
    #typesOfShape
@@ -10,23 +10,13 @@ export class RandomShapeModule extends Module {
       this.#typesOfShape = ['rect', 'circle', 'ellipse', 'polygon', 'line'];
    }
 
-   randomType() {
+   #randomType() {
       return random(0, this.#typesOfShape.length - 1);
    };
-   randomColor() {
+   #randomColor() {
       return `#${(Math.random().toString(16) + '000000').substring(2,8).toUpperCase()}`;
    };
-   randomGradiend() {
-      return `
-         <defs>
-            <linearGradient id="${random(0, 200)}" gradientTransform="rotate(${random(0, 100)})">
-               <stop offset="${random(0, 15)}%"  stop-color="${this.randomColor()}"></stop>
-               <stop offset="${random(85, 100)}%" stop-color="${this.randomColor()}"></stop>
-            </linearGradient>
-         </defs>
-      `;
-   };
-   createRect() {
+   #createRect() {
       const gradientID = random(0, 200);
       const width = random(50, 250);
       const height = random(50, 250);
@@ -34,8 +24,8 @@ export class RandomShapeModule extends Module {
         <svg>
             <defs>
             <linearGradient id="${gradientID}" gradientTransform="rotate(${random(0, 100)})">
-               <stop offset="${random(0, 15)}%"  stop-color="${this.randomColor()}"></stop>
-               <stop offset="${random(85, 100)}%" stop-color="${this.randomColor()}"></stop>
+               <stop offset="${random(0, 15)}%"  stop-color="${this.#randomColor()}"></stop>
+               <stop offset="${random(85, 100)}%" stop-color="${this.#randomColor()}"></stop>
             </linearGradient>
             </defs>
             <rect 
@@ -46,52 +36,52 @@ export class RandomShapeModule extends Module {
         </svg>
       `;
    };
-   createCircle() {
+   #createCircle() {
       const gradientID = random(0, 200);
       const width = random(50, 250);
       const height = random(50, 250);
       return `
-         <svg width="${width}" height="${height}">
+         <svg>
             <defs>
             <linearGradient id="${gradientID}" gradientTransform="rotate(${random(0, 100)})">
-               <stop offset="${random(0, 15)}%"  stop-color="${this.randomColor()}"></stop>
-               <stop offset="${random(85, 100)}%" stop-color="${this.randomColor()}"></stop>
+               <stop offset="${random(0, 15)}%"  stop-color="${this.#randomColor()}"></stop>
+               <stop offset="${random(85, 100)}%" stop-color="${this.#randomColor()}"></stop>
             </linearGradient>
             </defs>
             <circle 
             width="${width}" 
             height="${height}" 
-            r="${random(20, 100)}" 
-            cx="${random(70, 90)}" 
-            cy="${random(70, 90)}" 
+            r="${random(20, 70)}" 
+            cx="50%" 
+            cy="50%" 
             fill="url('#${gradientID}')"
             />
          </svg>
       `;
    };
-   createEllips() {
+   #createEllips() {
       const gradientID = random(0, 200);
       const width = random(50, 250);
-      const height = random(50, 250);
+      const height = random(100, 250);
       return `
          <svg width="${width}" height="${height}">
             <defs>
-            <linearGradient id="${gradientID}" gradientTransform="rotate(${random(0, 100)})">
-               <stop offset="${random(0, 15)}%"  stop-color="${this.randomColor()}"></stop>
-               <stop offset="${random(85, 100)}%" stop-color="${this.randomColor()}"></stop>
-            </linearGradient>
+               <linearGradient id="${gradientID}" gradientTransform="rotate(${random(0, 100)})">
+                  <stop offset="${random(0, 15)}%"  stop-color="${this.#randomColor()}"></stop>
+                  <stop offset="${random(85, 100)}%" stop-color="${this.#randomColor()}"></stop>
+               </linearGradient>
             </defs>
             <ellipse 
-            rx="${random(60, 110)}" 
-            ry="${random(30, 100)}" 
-            cx="${random(60, 110)}" 
-            cy="${random(30, 100)}" 
+            rx="50%" 
+            ry="50%" 
+            cx="50%" 
+            cy="50%" 
             fill="url('#${gradientID}')"
             />
          </svg>`;
        
    };
-   createLine() {
+   #createLine() {
       const gradientID = random(85, 100);
       const width = random(50, 250);
       const height = random(50, 250);
@@ -100,8 +90,8 @@ export class RandomShapeModule extends Module {
          <svg width="${width}" height="${height}">
             <defs>
             <linearGradient id="${gradientID}" gradientTransform="rotate(${random(0, 100)})">
-               <stop offset="${random(0, 15)}%"  stop-color="${this.randomColor()}"></stop>
-               <stop offset="${random(85, 100)}%" stop-color="${this.randomColor()}"></stop>
+               <stop offset="${random(0, 15)}%"  stop-color="${this.#randomColor()}"></stop>
+               <stop offset="${random(85, 100)}%" stop-color="${this.#randomColor()}"></stop>
             </linearGradient>
             </defs>
             <line 
@@ -114,63 +104,61 @@ export class RandomShapeModule extends Module {
          </svg>
       `;
    };
-   createPolygon() {
+   #createPolygon() {
       const gradientID = random(85, 100);
-      const width = random(50, 250);
-      const height = random(50, 250);
       return `
-         <svg width="${width}" height="${height}">
+         <svg>
             <defs>
             <linearGradient id="${gradientID}" gradientTransform="rotate(${random(0, 100)})">
-               <stop offset="${random(0, 15)}%"  stop-color="${this.randomColor()}"></stop>
-               <stop offset="${random(85, 100)}%" stop-color="${this.randomColor()}"></stop>
+               <stop offset="${random(0, 15)}%"  stop-color="${this.#randomColor()}"></stop>
+               <stop offset="${random(85, 100)}%" stop-color="${this.#randomColor()}"></stop>
             </linearGradient>
             </defs>
             <polygon points="
             ${random(5,10)},${random(100,150)}
-            ${random(100,150)},${random(5,15)}
+            ${random(50,150)},${random(5,15)}
             ${random(200,250)},${random(100,150)}"
             fill="url('#${gradientID}')"
             />
          </svg>
       `;
    };
-   removeShape() {
+   #removeShape() {
       document.querySelector('.random-shape').remove();
    };
 
-   createRandomShape() {
+   #createRandomShape() {
       const wrapper = document.createElement('div');
-      wrapper.className = 'random-shape rotate';
+      wrapper.className = 'random-shape';
       wrapper.style.cssText = `
          position: absolute; 
-         top: ${random(1, window.innerHeight - 250)}px;
-         left: ${random(0, window.innerWidth - 250)}px;
+         bottom: ${random(10, window.innerHeight - 250)}px;
+         right: ${random(10, window.innerWidth - 250)}px;
       `
       
-      switch (this.#typesOfShape[this.randomType()]) {
+      switch (this.#typesOfShape[this.#randomType()]) {
          case 'rect':
-             wrapper.innerHTML = this.createRect();
+             wrapper.innerHTML = this.#createRect();
              return wrapper;
          case 'circle': 
-            wrapper.innerHTML = this.createCircle();
+            wrapper.innerHTML = this.#createCircle();
             return wrapper;
          case 'ellipse':
-            wrapper.innerHTML = this.createEllips();
+            wrapper.innerHTML = this.#createEllips();
             return wrapper;
          case 'line':
-            wrapper.innerHTML = this.createLine();
+            wrapper.innerHTML = this.#createLine();
             return wrapper;
          case 'polygon': 
-            wrapper.innerHTML = this.createPolygon();
+            wrapper.innerHTML = this.#createPolygon();
             return wrapper;
          default: 
-            wrapper.innerHTML = this.createPolygon();
+            wrapper.innerHTML = this.#createPolygon();
             return wrapper
          }
    }
    trigger() {
-      document.body.append(this.createRandomShape());
-      // setTimeout(() => this.removeShape(), 2000);
+      document.body.append(this.#createRandomShape());
+      setTimeout(() => this.#removeShape(), 2000);
    }
 }
