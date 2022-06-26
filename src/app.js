@@ -1,6 +1,6 @@
 import './styles.css';
 
-// 1. --- Modules import 
+// 1. --- Modules import
 import { MessageModule } from './modules/message.module';
 import { LoggerModule } from './modules/logger.module';
 
