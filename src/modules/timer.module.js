@@ -14,12 +14,14 @@ export class TimerModule extends Module {
 
   createTimePromise(time) {
     const timer = this.tmrComponent.add(time);
-    const promiseTimer = new Promise((resolve) => {
-      setTimeout(() => {
-        this.tmrComponent.decreseTime(timer);
-        resolve();
-      }, 1000);
-    });
+
+    const promiseTimer = () =>
+      new Promise((resolve) => {
+        setTimeout(() => {
+          this.tmrComponent.decreseTime(timer);
+          resolve();
+        }, 1000);
+      });
 
     return promiseTimer;
   }
@@ -30,10 +32,6 @@ export class TimerModule extends Module {
 
   trigger() {
     this.#timers.push(this.createTimePromise(random(2, 3)));
-    if (this.#timers.length) {
-      this.seqRunner(this.#timers).then(() => {
-        console.log('Done!');
-      });
-    }
+    this.seqRunner(this.#timers);
   }
 }
