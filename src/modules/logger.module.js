@@ -1,3 +1,5 @@
+import '../css/logger.module.css';
+
 import { Module } from '../core/module';
 import { MessagerComponent } from '../components/messager.component';
 import { LoggerComponent } from '../components/logger.component';

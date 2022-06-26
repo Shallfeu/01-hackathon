@@ -1,0 +1,3 @@
+li[data-type=MessageModule]::before {
+    background-image: url('../assets/messager.module.png') !important;
+}
