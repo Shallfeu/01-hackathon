@@ -1,0 +1,3 @@
+li[data-type=GradientColorModule]::before {
+    background-image: url('../assets/linear.gradient.color.module.png') !important;
+}

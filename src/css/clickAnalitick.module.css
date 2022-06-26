@@ -1,0 +1,3 @@
+li[data-type=ClickAnaliticModule]::before {
+    background-image: url('../assets/clickAnalitick.module.png') !important;
+}

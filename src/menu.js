@@ -12,7 +12,7 @@ export class ContextMenu extends Menu {
 
   constructor(selector, modules = []) {
     super(selector);
-    this.modules = modules;
+    this.#modules = modules;
     this.#log = new LoggerComponent();
   }
 
@@ -28,7 +28,7 @@ export class ContextMenu extends Menu {
 
     return (
       this.el?.style &&
-      Object.keys(this.modules).length &&
+      Object.keys(this.#modules).length &&
       (this.el.style = `top:${top || 0}px; left:${left || 0}px; display:block;`)
     );
   }
@@ -40,8 +40,8 @@ export class ContextMenu extends Menu {
 
   add() {
     return (
-      Object.keys(this.modules).length &&
-      (this.el.innerHTML = Object.values(this.modules).reduce((acc, mod) => {
+      Object.keys(this.#modules).length &&
+      (this.el.innerHTML = Object.values(this.#modules).reduce((acc, mod) => {
         this.#log.setLog = `Add module '${mod.text}' to menu`;
         return (acc += mod.toHTML());
       }, ''))
@@ -94,7 +94,7 @@ export class ContextMenu extends Menu {
       'click',
       (event) =>
         event.target.tagName === 'LI' &&
-        this.modules
+        this.#modules
           .find(
             (mod) =>
               mod.type === event.target.dataset.type &&
