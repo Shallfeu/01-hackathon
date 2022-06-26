@@ -57,6 +57,7 @@ export class TimerModule extends Module {
           '<div class="timer"><input class="timer-time" type="number" value="0"><button class="timer-btn">Start</button></div>',
       },
       100,
+      'error',
     );
     this.#timers.push(timer);
     timer.querySelector('.timer-btn').addEventListener('click', (event) => {
