@@ -1,5 +1,5 @@
 import { Module } from '../core/module';
-import { random } from '../utils';
+import { easyHide, random } from '../utils';
 import '../css/random-shape.module.css';
 
 export class RandomShapeModule extends Module {
@@ -105,8 +105,8 @@ export class RandomShapeModule extends Module {
          </svg>
       `;
    };
-   #removeShape() {
-      document.querySelector('.random-shape').remove();
+   #removeShape(shape) {
+      easyHide(shape);
    };
 
    #createRandomShape() {
@@ -137,7 +137,8 @@ export class RandomShapeModule extends Module {
          }
    }
    trigger() {
-      document.body.append(this.#createRandomShape());
-      setTimeout(() => this.#removeShape(), 2000);
+      const randomShape = this.#createRandomShape();
+      document.body.append(randomShape);
+      setTimeout(() => this.#removeShape(randomShape), 2000);
    }
 }

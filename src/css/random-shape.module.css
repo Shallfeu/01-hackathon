@@ -1,3 +1,3 @@
-.rotate {
-    background-color: black; 
+li[data-type=RandomShapeModule]::before {
+    background-image: url('../assets/random-shape.png') !important;
 }
