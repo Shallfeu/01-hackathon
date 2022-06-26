@@ -48,7 +48,11 @@ module.exports = (env, argv) => {
       }),
     ],
     module: {
-      rules: [
+      rules: [        
+        {
+          test: /\.css$/i,
+          use: [MiniCssExtractPlugin.loader, "css-loader"],
+        },
         {
           test: /\.m?js$/,
           exclude: /node_modules/,
@@ -58,10 +62,6 @@ module.exports = (env, argv) => {
               presets: ['@babel/preset-env']
             }
           }
-        },
-        {
-          test: /\.css$/i,
-          use: [MiniCssExtractPlugin.loader, "css-loader"],
         }
       ],
     }
