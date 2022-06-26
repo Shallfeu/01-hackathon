@@ -48,3 +48,9 @@
   display: block;
   padding-top: 0.5em;
 }
+
+.MessagerComponent__item.for-delete {
+  transition: opacity 1s;
+  opacity: 0;
+}
+

@@ -24,7 +24,8 @@ export class MessagerComponent {
 
   // Delete message from DOM
   #delete(msg) {
-    msg.remove();
+    msg.classList.add('for-delete');
+    setTimeout(() => msg.remove(), 1000);    
   }
 
   // --- Add message
