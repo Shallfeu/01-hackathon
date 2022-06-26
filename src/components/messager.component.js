@@ -30,7 +30,7 @@ export class MessagerComponent {
   // --- Add message
   add({ text, title }, delay = 3, type = 'info') {
     const msg = this.#render(text, title, type);
-    setTimeout(() => this.#delete(msg), delay * 1000);
+    delay !== 0 && setTimeout(() => this.#delete(msg), delay * 1000);
     return msg;
   }
 }
