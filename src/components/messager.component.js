@@ -23,7 +23,7 @@ export class MessagerComponent {
   }
 
   // Delete message from DOM
-  #delete(msg) {
+  delete(msg) {
     msg.classList.add('for-delete');
     setTimeout(() => msg.remove(), 1000);    
   }
@@ -31,7 +31,7 @@ export class MessagerComponent {
   // --- Add message
   add({ text, title }, delay = 3, type = 'info') {
     const msg = this.#render(text, title, type);
-    delay !== 0 && setTimeout(() => this.#delete(msg), delay * 1000);
+    delay !== 0 && setTimeout(() => this.delete(msg), delay * 1000);
     return msg;
   }
 }

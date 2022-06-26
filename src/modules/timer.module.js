@@ -3,23 +3,19 @@ import { MessagerComponent } from '../components/messager.component';
 import '../css/message.module.css';
 
 export class TimerModule extends Module {
-  #timers;
-
   constructor() {
     super('TimerModul', 'Задать таймер');
     this.msgComponent = new MessagerComponent();
-    this.#timers = [];
   }
 
   // Decrease timer
-  decreseTime(timerComponent) {
+  decreseTime(timerComponent, msgForUser = 'Время вышло!', delay = 1) {
     const timerStr = timerComponent.querySelector('.timer-time');
     const interval = setInterval(() => {
-      const oldTime = Number(timerStr.textContent);
-      const newTime = oldTime - 1;
+      const newTime = Number(timerStr.textContent) - 1;
 
       if (newTime < 1) {
-        timerStr.textContent = 'Время вышло!';
+        timerStr.textContent = msgForUser;
         clearInterval(interval);
         setTimeout(() => {
           timerComponent.remove();
@@ -27,7 +23,7 @@ export class TimerModule extends Module {
       } else {
         timerStr.textContent = newTime;
       }
-    }, 1000);
+    }, delay * 1000);
   }
 
   // Create h2 element where we will keep time
@@ -59,7 +55,6 @@ export class TimerModule extends Module {
       100,
       'error',
     );
-    this.#timers.push(timer);
     timer.querySelector('.timer-btn').addEventListener('click', (event) => {
       const timeStr = this.createTimer(event.target);
       this.decreseTime(timeStr);
