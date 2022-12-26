@@ -19,7 +19,7 @@ module.exports = (env, argv) => {
       main: ['core-js/stable', 'regenerator-runtime/runtime', './app.js'],
     },
     output: {
-      hashFunction: 'xxhash64',
+      hashFunction: 'sha256',
       path: path.resolve(__dirname, 'dist'),
       filename: filename('js'),
       clean: true,
